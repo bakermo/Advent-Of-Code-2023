@@ -1,0 +1,32 @@
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\Day1.exe
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\Day1.deps.json
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\Day1.runtimeconfig.json
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\Day1.dll
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\Day1.pdb
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.csproj.AssemblyReference.cache
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.AssemblyInfoInputs.cache
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.AssemblyInfo.cs
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.csproj.CoreCompileInputs.cache
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.dll
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\refint\Day1.dll
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.pdb
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\Day1.genruntimeconfig.cache
+D:\Advent of Code 2023\Day 1\Day1\obj\Debug\net6.0\ref\Day1.dll
+D:\Advent of Code 2023\Day 1\Day1\bin\Debug\net6.0\values.txt
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\Day1.exe
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\values.txt
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\Day1.deps.json
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\Day1.runtimeconfig.json
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\Day1.dll
+D:\Advent of Code 2023\Day1\bin\Debug\net6.0\Day1.pdb
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.csproj.AssemblyReference.cache
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.AssemblyInfoInputs.cache
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.AssemblyInfo.cs
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.csproj.CoreCompileInputs.cache
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.dll
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\refint\Day1.dll
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.pdb
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\Day1.genruntimeconfig.cache
+D:\Advent of Code 2023\Day1\obj\Debug\net6.0\ref\Day1.dll

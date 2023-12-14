@@ -1,0 +1,16 @@
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\Day7 - Part 2.exe
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\values.txt
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\Day7 - Part 2.deps.json
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\Day7 - Part 2.runtimeconfig.json
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\Day7 - Part 2.dll
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\bin\Debug\net6.0\Day7 - Part 2.pdb
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.csproj.AssemblyReference.cache
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.AssemblyInfoInputs.cache
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.AssemblyInfo.cs
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.csproj.CoreCompileInputs.cache
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.dll
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\refint\Day7 - Part 2.dll
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.pdb
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\Day7 - Part 2.genruntimeconfig.cache
+D:\Advent of Code 2023\Day7 - Part 2 - Copy\obj\Debug\net6.0\ref\Day7 - Part 2.dll

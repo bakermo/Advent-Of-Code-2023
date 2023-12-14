@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8 - Part 1.csproj": {}
+    "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8.csproj": {}
   },
   "projects": {
-    "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8 - Part 1.csproj": {
+    "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8 - Part 1.csproj",
-        "projectName": "Day8 - Part 1",
-        "projectPath": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8 - Part 1.csproj",
+        "projectUniqueName": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8.csproj",
+        "projectName": "Day8",
+        "projectPath": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8.csproj",
         "packagesPath": "C:\\Users\\trekm\\.nuget\\packages\\",
         "outputPath": "D:\\Advent of Code 2023\\Day8 - Part 1\\obj\\",
         "projectStyle": "PackageReference",

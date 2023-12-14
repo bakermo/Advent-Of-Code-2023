@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "x/Ilj2EOUeofX9E1snnktk/P3vW2jlzhOmFZBquHy00MeML3gI3tu6pC7YEBMEu6vCTzeKD734yBvVQaUbRlgw==",
+  "dgSpecHash": "D+m+XQSzD+n5bxBDbB1rB8WpyQx31sUvO+PdPuT2Km/O/D4rk7L4le7MNl9meg+0NNaXI0pEeJ78+lFKMMQAaA==",
   "success": true,
-  "projectFilePath": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8 - Part 1.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Advent of Code 2023\\Day8 - Part 1\\Day8.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trekm\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

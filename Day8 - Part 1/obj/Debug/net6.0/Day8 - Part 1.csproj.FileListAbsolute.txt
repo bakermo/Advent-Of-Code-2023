@@ -14,3 +14,6 @@ D:\Advent of Code 2023\Day8 - Part 1\obj\Debug\net6.0\Day8 - Part 1.pdb
 D:\Advent of Code 2023\Day8 - Part 1\obj\Debug\net6.0\Day8 - Part 1.genruntimeconfig.cache
 D:\Advent of Code 2023\Day8 - Part 1\obj\Debug\net6.0\ref\Day8 - Part 1.dll
 D:\Advent of Code 2023\Day8 - Part 1\bin\Debug\net6.0\values.txt
+D:\Advent of Code 2023\Day8 - Part 1\bin\Debug\net6.0\MathNet.Numerics.dll
+D:\Advent of Code 2023\Day8 - Part 1\obj\Debug\net6.0\Day8 - Part 1.sourcelink.json
+D:\Advent of Code 2023\Day8 - Part 1\obj\Debug\net6.0\Day8 - Part 1.csproj.CopyComplete

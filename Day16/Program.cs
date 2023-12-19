@@ -2,7 +2,131 @@
 string fileName = useTest ? "sample.txt" : "input.txt";
 
 var input = File.ReadAllLines(fileName);
-PartOne(input);
+//PartOne(input);
+
+PartTwo(input);
+void PartTwo(string[] input)
+{
+
+    // convert the input lines to a 2d array of Node objects
+    var grid = new Node[input.Length][];
+    for (int i = 0; i < input.Length; i++)
+    {
+        grid[i] = new Node[input[i].Length];
+        for (int j = 0; j < input[i].Length; j++)
+        {
+            grid[i][j] = new Node(input[i][j], i, j);
+        }
+    }
+
+    var board = new Board(grid);
+    var startingMoves = new List<Move>();
+
+    // get all nodes in the first row
+    for (int i = 0; i < board.Nodes[0].Length; i++)
+    {
+        startingMoves.Add(new Move(board.Nodes[0][i], Direction.Down));
+    }
+    // get all nodes in the last row
+    for (int i = 0; i < board.Nodes[board.Nodes.Length - 1].Length; i++)
+    {
+        startingMoves.Add(new Move(board.Nodes[board.Nodes.Length - 1][i], Direction.Up));
+    }
+    // get all nodes in the first column
+    for (int i = 0; i < board.Nodes.Length; i++)
+    {
+        startingMoves.Add(new Move(board.Nodes[i][0], Direction.Right));
+    }
+    // get all nodes in the last column
+    for (int i = 0; i < board.Nodes.Length; i++)
+    {
+        startingMoves.Add(new Move(board.Nodes[i][board.Nodes[i].Length - 1], Direction.Left));
+    }
+    var runs = new List<int>();
+    foreach (var startingMove in startingMoves)
+    {
+
+        // reset the values on the board
+        for (int i = 0; i < input.Length; i++)
+        {
+            for (int j = 0; j < input[i].Length; j++)
+            {
+                board.Nodes[i][j].Value = input[i][j];
+                board.Nodes[i][j].ClearVisits();
+            }
+        }
+
+        var threads = new Queue<Move>();
+        threads.Enqueue(new Move(startingMove.Node, startingMove.Direction));
+
+       // PrintBoard(board);
+
+        while (threads.Count > 0)
+        {
+            var currentMove = threads.Dequeue();
+            var currentNode = currentMove.Node;
+            if (!currentNode.HasBeenVisitedFrom(currentMove.Direction))
+            {
+                currentNode.Visit(currentMove.Direction);
+                Direction nextDirection = currentMove.Direction;
+
+                if (currentNode.Value == '/')
+                {
+                    if (IsVertical(nextDirection))
+                        nextDirection = RotateClockwise(nextDirection);
+                    else
+                        nextDirection = RotateCounterClockwise(nextDirection);
+
+                    board.QueueNextNode(currentNode, threads, nextDirection);
+                }
+                else if (currentNode.Value == '\\')
+                {
+                    if (IsVertical(nextDirection))
+                        nextDirection = RotateCounterClockwise(nextDirection);
+                    else
+                        nextDirection = RotateClockwise(nextDirection);
+
+                    board.QueueNextNode(currentNode, threads, nextDirection);
+                }
+                else if (currentNode.Value == '-')
+                {
+                    if (IsVertical(nextDirection))
+                    {
+                        board.QueueLeft(currentNode, threads);
+                        board.QueueRight(currentNode, threads);
+                    }
+                    else
+                        board.QueueNextNode(currentNode, threads, nextDirection);
+                }
+                else if (currentNode.Value == '|')
+                {
+                    if (IsHorizontal(nextDirection))
+                    {
+                        board.QueueUp(currentNode, threads);
+                        board.QueueDown(currentNode, threads);
+                    }
+                    else
+                        board.QueueNextNode(currentNode, threads, nextDirection);
+
+                }
+                else
+                {
+                    board.QueueNextNode(currentNode, threads, nextDirection);
+                }
+            }
+        }
+
+        //PrintBoard(board);
+
+
+        int energizedNodes = CalculateEnergizedNodes(board);
+        runs.Add(energizedNodes);
+        //PrintBoard(board);
+        Console.WriteLine("energizedNodes: " + energizedNodes);
+    }
+    
+    Console.WriteLine("max: " + runs.Max());
+}
 
 void PartOne(string[] input)
 {
@@ -44,8 +168,6 @@ void PartOne(string[] input)
                     nextDirection = RotateCounterClockwise(nextDirection);
 
                 board.QueueNextNode(currentNode, threads, nextDirection);
-                //PrintBoard(board);
-
             }
             else if (currentNode.Value == '\\')
             {
@@ -55,8 +177,6 @@ void PartOne(string[] input)
                     nextDirection = RotateClockwise(nextDirection);
 
                 board.QueueNextNode(currentNode, threads, nextDirection);
-                //PrintBoard(board);
-
             }
             else if (currentNode.Value == '-')
             {
@@ -67,8 +187,6 @@ void PartOne(string[] input)
                 }
                 else
                     board.QueueNextNode(currentNode, threads, nextDirection);
-                //PrintBoard(board);
-
             }
             else if (currentNode.Value == '|')
             {
@@ -79,17 +197,10 @@ void PartOne(string[] input)
                 }
                 else
                     board.QueueNextNode(currentNode, threads, nextDirection);
-                //PrintBoard(board);
 
             }
             else
             {
-                //int visits = currentNode.Visits();
-                //if (visits > 1)
-                //    currentNode.Value = visits.ToString()[0];
-                //else
-                //    currentNode.Value = (char)nextDirection;
-
                 board.QueueNextNode(currentNode, threads, nextDirection);
             }
         }
@@ -97,6 +208,15 @@ void PartOne(string[] input)
 
     PrintBoard(board);
 
+   
+    int energizedNodes = CalculateEnergizedNodes(board);
+
+    PrintBoard(board);
+    Console.WriteLine("energizedNodes: " + energizedNodes);
+}
+
+int CalculateEnergizedNodes(Board board)
+{
     var energizedNodes = 0;
     for (int i = 0; i < board.Nodes.Length; i++)
     {
@@ -107,10 +227,7 @@ void PartOne(string[] input)
             energizedNodes += node.HasBeenVisited() ? 1 : 0;
         }
     }
-        
-
-    PrintBoard(board);
-    Console.WriteLine("energizedNodes: " + energizedNodes);
+    return energizedNodes;
 }
 
 void PrintBoard(Board board)
@@ -273,6 +390,8 @@ class Node
         else
             _visits.Add(direction, 1);
     }
+
+    public void ClearVisits() => _visits.Clear();
 
     public int Visits() 
     {

@@ -2,7 +2,8 @@
 string fileName = useTest ? "sample.txt" : "input.txt";
 
 var input = File.ReadAllLines(fileName);
-PartOne(input);
+//PartOne(input);
+PartTwo(input);
 
 void PartOne(string[] input)
 {
@@ -61,6 +62,67 @@ void PartOne(string[] input)
 
 }
 
+void PartTwo(string[] input)
+{
+    var grid = new Grid(input);
+    grid.PrintGrid();
+
+    var visited = new HashSet<(int, int, Direction, int)>();
+    var start = new PlannerNode(grid.GetNode(0, 0));
+    start!.Cost = 0;
+
+    var priorityQueue = new PriorityQueue<PlannerNode, int>();
+
+    priorityQueue.Enqueue(start, start.Cost);
+    int targetRowIndex = grid.GridNodes.GetLength(0) - 1;
+    int targetColIndex = grid.GridNodes.GetLength(1) - 1;
+    while (priorityQueue.Count > 0)
+    {
+        var current = priorityQueue.Dequeue();
+        if (current.GridNode.Row == targetRowIndex && current.GridNode.Col == targetColIndex 
+            && current.NumberInThisDirection >= 4) // this was so easy to miss.. should have been bolded in the instructions
+        {
+            Console.WriteLine("Cost: " + current.Cost);
+            MarkPath(current);
+            break;
+        }
+
+
+        if (visited.Contains((current.GridNode.Row, current.GridNode.Col, current.Direction, current.NumberInThisDirection)))
+            continue;
+
+        visited.Add((current.GridNode.Row, current.GridNode.Col, current.Direction, current.NumberInThisDirection));
+
+        if (current.NumberInThisDirection < 10 && current.Direction != Direction.Nowhere)
+        {
+            var next = grid.GetNext(current.GridNode, current.Direction);
+            if (next != null)
+            {
+                var plannerNode = new PlannerNode(next, current, current.Direction, current.NumberInThisDirection + 1);
+                plannerNode.Cost = current.Cost + next.Cost;
+
+                priorityQueue.Enqueue(plannerNode, plannerNode.Cost);
+            }
+        }
+
+        if (current.NumberInThisDirection >= 4 || current.Direction == Direction.Nowhere)
+        {
+            foreach (var neighbor in grid.GetNeighborNodes(current.GridNode))
+            {
+                Direction neighborDirection = grid.GetNeighborDirection(neighbor, current.GridNode);
+                if (neighborDirection != current.Direction && !IsOppositeDirection(current.Direction, neighborDirection))
+                {
+                    var plannerNode = new PlannerNode(neighbor, current, neighborDirection, 1);
+                    plannerNode.Cost = current.Cost + neighbor.Cost;
+                    priorityQueue.Enqueue(plannerNode, plannerNode.Cost);
+                }
+            }
+        }
+    }
+    grid.PrintGrid();
+
+}
+
 bool IsOppositeDirection(Direction current, Direction newDirection)
 {
     if (current == Direction.Nowhere)
@@ -98,13 +160,13 @@ class Grid
 {
     public Grid(string[] input)
     {
-        var width = input[0].Length;
-        var height = input.Length;
-        GridNodes = new GridNode[width, height];
-        for (int row = 0; row < height; row++)
+        var cols = input[0].Length;
+        var rows = input.Length;
+        GridNodes = new GridNode[rows, cols];
+        for (int row = 0; row < rows; row++)
         {
             var line = input[row];
-            for (int col = 0; col < width; col++)
+            for (int col = 0; col < cols; col++)
             {
                 var c = line[col];
                 GridNodes[row, col] = new GridNode(int.Parse(c.ToString()), row, col);

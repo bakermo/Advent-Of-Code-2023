@@ -1,4 +1,4 @@
-﻿bool useTest = true;
+﻿bool useTest = false;
 string fileName = useTest ? "sample.txt" : "input.txt";
 
 var input = File.ReadAllLines(fileName);
@@ -7,15 +7,15 @@ PartOne(input);
 void PartOne(string[] input)
 {
     var grid = new Grid(input);
-
     grid.PrintGrid();
 
-    var visited = new HashSet<GridNode>();
+    var visited = new HashSet<(int, int, Direction, int)>();
     var start = new PlannerNode(grid.GetNode(0, 0));
     start!.Cost = 0;
 
-    var priorityQueue = new PriorityQueue<PlannerNode, PlannerNode>();
-    priorityQueue.Enqueue(start, start);
+    var priorityQueue = new PriorityQueue<PlannerNode, int>();
+
+    priorityQueue.Enqueue(start, start.Cost);
     int targetRowIndex = grid.GridNodes.GetLength(0) - 1;
     int targetColIndex = grid.GridNodes.GetLength(1) - 1;
     while (priorityQueue.Count > 0) 
@@ -28,31 +28,32 @@ void PartOne(string[] input)
             break;
         }
 
-        if (visited.Contains(current.GridNode))
+
+        if (visited.Contains((current.GridNode.Row, current.GridNode.Col, current.Direction, current.NumberInThisDirection)))
             continue;
 
-        visited.Add(current.GridNode);
+        visited.Add((current.GridNode.Row, current.GridNode.Col, current.Direction, current.NumberInThisDirection));
+
+        if (current.NumberInThisDirection < 3 && current.Direction != Direction.Nowhere)
+        {
+            var next = grid.GetNext(current.GridNode, current.Direction);
+            if (next != null)
+            {
+                var plannerNode = new PlannerNode(next, current, current.Direction, current.NumberInThisDirection + 1);
+                plannerNode.Cost = current.Cost + next.Cost;
+
+                priorityQueue.Enqueue(plannerNode, plannerNode.Cost);
+            }
+        } 
 
         foreach (var neighbor in grid.GetNeighborNodes(current.GridNode))
         {
-            var relativeCost = current.Cost + neighbor.Cost;
-            neighbor.Cost = relativeCost;
             Direction neighborDirection = grid.GetNeighborDirection(neighbor, current.GridNode);
-            if (!IsOppositeDirection(current.Direction, neighborDirection))
+            if (neighborDirection != current.Direction && !IsOppositeDirection(current.Direction, neighborDirection))
             {
-                if (current.Direction == neighborDirection)
-                {
-                    if (current.NumberInThisDirection < 3)
-                    {
-                        var plannerNode = new PlannerNode(neighbor, current, neighborDirection, current.NumberInThisDirection + 1);
-                        priorityQueue.Enqueue(plannerNode, plannerNode);
-                    }
-                }
-                else
-                {
-                    var plannerNode = new PlannerNode(neighbor, current, neighborDirection, 1);
-                    priorityQueue.Enqueue(plannerNode, plannerNode);
-                }
+                var plannerNode = new PlannerNode(neighbor, current, neighborDirection, 1);
+                plannerNode.Cost = current.Cost + neighbor.Cost;
+                priorityQueue.Enqueue(plannerNode, plannerNode.Cost);
             }
         }
     }
@@ -60,12 +61,12 @@ void PartOne(string[] input)
 
 }
 
-bool IsOppositeDirection(Direction? current, Direction newDirection)
+bool IsOppositeDirection(Direction current, Direction newDirection)
 {
-    if (current == null)
+    if (current == Direction.Nowhere)
         return false;
 
-    return newDirection == GetOppositeDirection(current.Value);
+    return newDirection == GetOppositeDirection(current);
 }
 Direction GetOppositeDirection(Direction direction)
 {
@@ -87,7 +88,7 @@ void MarkPath(PlannerNode finalNode)
     var currentNode = finalNode;
     while (currentNode != null)
     {
-        if (currentNode.Direction.HasValue)
+        if (currentNode.Direction != Direction.Nowhere)
             currentNode.GridNode.Label = (char)currentNode.Direction;
         currentNode = currentNode.Predecessor;
     }
@@ -111,8 +112,6 @@ class Grid
         }
     }
 
-    public int Size => GridNodes.Length;
-
     public GridNode? GetNode(int row, int col)
     {
         if (row < 0 || row >= GridNodes.GetLength(0))
@@ -124,6 +123,23 @@ class Grid
             return null;
         }
         return GridNodes[row, col];
+    }
+
+    public GridNode? GetNext(GridNode current, Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return GetNode(current.Row - 1, current.Col);
+            case Direction.Down:
+                return GetNode(current.Row + 1, current.Col);
+            case Direction.Left:
+                return GetNode(current.Row, current.Col - 1);
+            case Direction.Right:
+                return GetNode(current.Row, current.Col + 1);
+            default:
+                return null;
+        }
     }
 
     public Direction GetNeighborDirection(GridNode neighbor, GridNode current)
@@ -198,10 +214,9 @@ class GridNode
     public int Col { get; }
     public int Cost { get; set; } = int.MaxValue / 2;
     public char Label { get; set; }
-    public GridNode? Predecessor { get; set; } = null;
 }
 
-class PlannerNode : IComparable<PlannerNode>
+class PlannerNode
 {
     public PlannerNode(GridNode gridNode)
     {
@@ -220,17 +235,14 @@ class PlannerNode : IComparable<PlannerNode>
 
     public GridNode GridNode { get; }
     public PlannerNode? Predecessor { get; }
-    public Direction? Direction { get; }
-    public int NumberInThisDirection { get; };
-    public int CompareTo(PlannerNode? other)
-    {
-        return Cost.CompareTo(other?.Cost);
-    }
+    public Direction Direction { get; } = Direction.Nowhere;
+    public int NumberInThisDirection { get; }
     public int Cost { get; set; }
 }
 
-enum Direction
+public enum Direction
 {
+    Nowhere,
     Up = '^',
     Down = 'v',
     Left = '<',

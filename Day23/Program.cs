@@ -20,6 +20,9 @@ void PartOne(string[] input)
 
         if (node.Value == '.')
             node.Value = '0';
+
+        //Console.Clear();
+        //Task.Delay(100);
         //grid.PrintGrid();
     }
 
@@ -62,6 +65,8 @@ Stack<GridNode> DFS(Grid grid)
             testPath.Push(neighbor);
             if (!visited.Contains(neighbor))
                 parentMap.Add(neighbor, node);
+            //else
+            //    parentMap[neighbor] = node;
         }
     }
 

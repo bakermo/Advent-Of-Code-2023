@@ -55,10 +55,8 @@ void PartOne(string[] input)
     foreach (var part in parts.OrderBy(p => p))
         Console.WriteLine(part);
 
-
-
     Console.WriteLine();
-    Console.WriteLine("Sum of parts: " + parts.Sum());// /*parts.Sum(p => p.Value)*/);
+    Console.WriteLine("Sum of parts: " + parts.Sum());
 }
 
 bool IsValidPartNumber(PartNumber partNumber, char[,] grid)
@@ -113,13 +111,6 @@ void Print(char[,] grid)
     }
 
     Console.WriteLine();
-}
-
-class Symbol
-{
-    public int Row { get; set; }
-    public int Column { get; set; }
-    public string Value { get; set; }
 }
 
 class PartNumber

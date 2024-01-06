@@ -15,7 +15,7 @@ var rawValues = File.ReadLines("values.txt").ToList();
 //    "zoneight234",
 //    "7pqrstsixteen",
 //};
-
+//test
 var textNumMap = new Dictionary<string, int>()
     {
         { "one", 1 },
